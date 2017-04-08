@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <form v-on:submit.prevent="submit" action="" method="">
+        <h2>¿Cursos favoritos?</h2>
+        <template v-for="c in cursos">
+          <curso v-bind:c="c" v-on:checked="selectCurso"></curso>
+
+        </template>
+        <button type="submit">Enviar</button>
+      </form>
+
+     </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript">
+
+    Vue.component('curso', {
+      props:[ 'curso' ],
+      methods:{
+        onchange: function(ev){
+          this.$emit('checked', this.curso.value, ev.target.checked
+            )
+        }
+      },
+      template: `
+        <div>
+          <input type="checkbox"
+          v-bind:id="c.value" v-bind:value="c.value" @change="onchange">
+          <label v-bind:for="c.value">Curso de {{ c.nombre }}</label>
+        </div>
+      `
+
+    })
+      let app = new Vue({
+        el: '#app',
+        data: {
+          cursos:[
+            {
+              nombre:'Curso de Python',
+              value:'Python'},
+            {
+              nombre:'Curso de JS',
+              value:'JS'},
+            {
+              nombre:'Curso de PHP',
+              value:'PHP'}
+          ],
+          cursosSeleccionados: []
+        },
+        filters:{
+
+        },
+        methods:{
+          submit: function(){
+            console.log('Se ejecuta')
+            console.log(this.cursosSeleccionados)
+          },
+          selectCurso: function(curso, checked){
+            if (checked){
+              this.cursosSeleccionados.push(curso)
+            }else{
+              let i = this.cursosSeleccionados.indexOf(curso)
+              this.cursosSeleccionados.splice(index, 1)
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
