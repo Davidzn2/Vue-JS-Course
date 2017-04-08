@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" name="nombre" placeholder="Ingresa tu nombre" v-model="nombre">
+      <p>Tu nombre en mayusculas es: {{nombre | uppercase}}</p>
+
+
+      <form v-on:submit.prevent="submit" action="" method="">
+        <h2>¿Cursos favoritos?</h2>
+        <input v-model="cursos" type="checkbox" id="Python" value="Python">
+        <label for="Python">Curso de Python</label>
+        <input v-model="cursos" type="checkbox" id="JS" value="JS">
+        <label for="JS">Curso de JS</label>
+        <input v-model="cursos" type="checkbox" id="PHP" value="PHP">
+        <label for="PHP">Curso de PHP</label>
+        <button type="submit">Enviar</button>
+      </form>
+
+     </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        data: {
+          nombre:'',
+          cursos:[]
+        },
+        filters:{
+          uppercase:function(str){
+            return str.toUpperCase()
+          }
+        },
+        methods:{
+          submit: function(){
+            console.log('Se ejecuta')
+            console.log(this.cursos)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
