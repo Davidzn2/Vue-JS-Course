@@ -6,12 +6,8 @@
   </head>
   <body>
     <div id="app">
-      <template  v-show="mostrar">
-        <h1>Titulo</h1>
-        <h2>Subtitulo</h2>
-        <a :href="url" target="_blank">Ir a: {{ pagina }}</a>
-
-      </template>
+      <h1>{{ titulo | uppercase  }}</h1>
+      <h2>{{ subtitulo | lowercase }}</h2>
      </div>
 
 
@@ -20,9 +16,16 @@
       let app = new Vue({
         el: '#app',
         data: {
-          pagina:'google',
-          url: 'http://google.com',
-          mostrar: true
+          titulo: 'Bienvenido',
+          subtitulo: 'Esta es una prueba'
+        },
+        filters:{
+          uppercase: function(str){
+            return str.toUpperCase()
+          },
+          lowercase: function(str){
+            return str.toLowerCase()
+          },
         }
       })
     </script>
